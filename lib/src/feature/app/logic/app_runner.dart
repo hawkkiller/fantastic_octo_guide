@@ -7,7 +7,7 @@ import 'package:octopus/src/core/utils/logger.dart';
 import 'package:octopus/src/feature/app/widget/app.dart';
 
 /// A class which is responsible for initialization and running the app.
-class AppRunner  {
+class AppRunner {
   /// run initialization
   ///
   /// if success -> run app
