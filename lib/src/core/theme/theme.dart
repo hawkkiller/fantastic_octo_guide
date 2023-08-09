@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+const $seedColor = Colors.blue;
+
 final $lightThemeData = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.blue,
+    seedColor: $seedColor,
   ),
   brightness: Brightness.light,
   useMaterial3: true,
@@ -10,7 +12,7 @@ final $lightThemeData = ThemeData(
 
 final $darkThemeData = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.blue,
+    seedColor: $seedColor,
     brightness: Brightness.dark,
   ),
   brightness: Brightness.dark,

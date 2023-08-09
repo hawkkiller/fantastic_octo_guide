@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizzle_starter/src/core/utils/extensions/string_extension.dart';
-import 'package:sizzle_starter/src/core/utils/logger.dart';
+import 'package:octopus/src/core/utils/extensions/string_extension.dart';
+import 'package:octopus/src/core/utils/logger.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override

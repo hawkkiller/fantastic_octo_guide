@@ -1,10 +1,8 @@
 {
-  "appTitle": "sizzle_starter",
+  "appTitle": "octopus",
   "@appTitle": {
     "description": "The title of the application"
   },
-  "samplePlaceholder": "Sample placeholder {value}",
-  "@samplePlaceholder": {
-    "description": "Sample placeholder"
-  }
+  "click": "Click",
+  "change_theme": "Change theme"
 }

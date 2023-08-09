@@ -1,5 +1,5 @@
-import 'package:sizzle_starter/src/feature/initialization/model/dependencies.dart';
-import 'package:sizzle_starter/src/feature/initialization/model/environment_store.dart';
+import 'package:octopus/src/feature/initialization/model/dependencies.dart';
+import 'package:octopus/src/feature/initialization/model/environment_store.dart';
 
 /// Initialization progress
 /// @nodoc

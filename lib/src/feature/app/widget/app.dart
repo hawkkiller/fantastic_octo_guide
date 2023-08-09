@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:octopus/src/core/widget/scope_widgets.dart';
+import 'package:octopus/src/core/widget/theme_scope.dart';
+import 'package:octopus/src/feature/app/widget/app_context.dart';
+import 'package:octopus/src/feature/initialization/model/dependencies.dart';
+import 'package:octopus/src/feature/initialization/widget/dependencies_scope.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sizzle_starter/src/core/widget/scope_widgets.dart';
-import 'package:sizzle_starter/src/feature/app/widget/app_context.dart';
-import 'package:sizzle_starter/src/feature/initialization/model/dependencies.dart';
-import 'package:sizzle_starter/src/feature/initialization/widget/dependencies_scope.dart';
 
 /// A widget which is responsible for running the app.
 class App extends StatelessWidget {
@@ -27,6 +28,11 @@ class App extends StatelessWidget {
           ScopeProvider(
             buildScope: (child) => DependenciesScope(
               dependencies: result.dependencies,
+              child: child,
+            ),
+          ),
+          ScopeProvider(
+            buildScope: (child) => ThemeScope(
               child: child,
             ),
           ),

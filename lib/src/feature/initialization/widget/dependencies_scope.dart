@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sizzle_starter/src/core/utils/mixin/scope_mixin.dart';
-import 'package:sizzle_starter/src/feature/initialization/model/dependencies.dart';
+import 'package:octopus/src/core/utils/mixin/scope_mixin.dart';
+import 'package:octopus/src/feature/initialization/model/dependencies.dart';
 
 /// A widget which is responsible for providing the dependencies.
 class DependenciesScope extends InheritedWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:sizzle_starter/src/feature/app/logic/tracking_manager.dart';
-import 'package:sizzle_starter/src/feature/initialization/logic/initialization_steps.dart';
-import 'package:sizzle_starter/src/feature/initialization/model/dependencies.dart';
-import 'package:sizzle_starter/src/feature/initialization/model/environment_store.dart';
-import 'package:sizzle_starter/src/feature/initialization/model/initialization_hook.dart';
-import 'package:sizzle_starter/src/feature/initialization/model/initialization_progress.dart';
+import 'package:octopus/src/feature/app/logic/tracking_manager.dart';
+import 'package:octopus/src/feature/initialization/logic/initialization_steps.dart';
+import 'package:octopus/src/feature/initialization/model/dependencies.dart';
+import 'package:octopus/src/feature/initialization/model/environment_store.dart';
+import 'package:octopus/src/feature/initialization/model/initialization_hook.dart';
+import 'package:octopus/src/feature/initialization/model/initialization_progress.dart';
 
 part 'initialization_factory.dart';
 
