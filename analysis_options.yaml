@@ -1,5 +1,5 @@
-include: package:sizzle_lints/sizzle_lints.yaml
+include: package:solid_lints/analysis_options.yaml
 
-analyzer: 
-  exclude: 
-    - "lib/src/core/localization/generated/**"
+linter:
+  rules:
+    prefer-match-file-name: ignore

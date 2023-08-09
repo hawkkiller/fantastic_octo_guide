@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-match-file-name
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -26,14 +28,6 @@ enum LoggerLevel implements Comparable<LoggerLevel> {
 
 /// Logger options
 base class LogOptions {
-  const LogOptions({
-    this.showTime = true,
-    this.showEmoji = true,
-    this.logInRelease = false,
-    this.level = LoggerLevel.info,
-    this.formatter,
-  });
-
   final LoggerLevel level;
 
   final bool showTime;
@@ -47,17 +41,18 @@ base class LogOptions {
     required StackTrace? stackTrace,
     required DateTime? time,
   })? formatter;
+
+  const LogOptions({
+    this.showTime = true,
+    this.showEmoji = true,
+    this.logInRelease = false,
+    this.level = LoggerLevel.info,
+    this.formatter,
+  });
 }
 
 /// Logger message
 base class LogMessage {
-  const LogMessage({
-    required this.message,
-    required this.logLevel,
-    this.stackTrace,
-    this.time,
-  });
-
   final String message;
 
   final StackTrace? stackTrace;
@@ -65,10 +60,20 @@ base class LogMessage {
   final DateTime? time;
 
   final LoggerLevel logLevel;
+
+  const LogMessage({
+    required this.message,
+    required this.logLevel,
+    this.stackTrace,
+    this.time,
+  });
 }
 
 /// Logger interface
 abstract interface class AppLogger {
+  /// Stream of logs
+  Stream<LogMessage> get logs;
+
   /// Logs the error to the console
   void error(Object message, {Object? error, StackTrace? stackTrace});
 
@@ -90,9 +95,6 @@ abstract interface class AppLogger {
     LogOptions options = const LogOptions(),
   ]);
 
-  /// Stream of logs
-  Stream<LogMessage> get logs;
-
   /// Handy method to log zoneError
   void logZoneError(Object error, StackTrace stackTrace) {
     this.error('Top-level error', error: error, stackTrace: stackTrace);
@@ -106,6 +108,7 @@ abstract interface class AppLogger {
   /// Handy method to log [PlatformDispatcher] error
   bool logPlatformDispatcherError(Object error, StackTrace stackTrace) {
     this.error(error, stackTrace: stackTrace);
+
     return true;
   }
 }
@@ -113,6 +116,21 @@ abstract interface class AppLogger {
 final class AppLogger$Logging extends AppLogger {
   final logger = logging.Logger('SizzleLogger');
 
+  @override
+  Stream<LogMessage> get logs => logger.onRecord.map(
+        (record) => LogMessage(
+          message: record.message,
+          stackTrace: record.stackTrace,
+          time: record.time,
+          logLevel: switch (record.level) {
+            logging.Level.SEVERE => LoggerLevel.error,
+            logging.Level.WARNING => LoggerLevel.warning,
+            logging.Level.INFO => LoggerLevel.info,
+            logging.Level.FINE || logging.Level.FINER => LoggerLevel.debug,
+            _ => LoggerLevel.verbose,
+          },
+        ),
+      );
   @override
   void debug(Object message) => logger.fine(message);
 
@@ -130,22 +148,6 @@ final class AppLogger$Logging extends AppLogger {
 
   @override
   void info(Object message) => logger.info(message);
-
-  @override
-  Stream<LogMessage> get logs => logger.onRecord.map(
-        (record) => LogMessage(
-          message: record.message,
-          stackTrace: record.stackTrace,
-          time: record.time,
-          logLevel: switch (record.level) {
-            logging.Level.SEVERE => LoggerLevel.error,
-            logging.Level.WARNING => LoggerLevel.warning,
-            logging.Level.INFO => LoggerLevel.info,
-            logging.Level.FINE || logging.Level.FINER => LoggerLevel.debug,
-            _ => LoggerLevel.verbose,
-          },
-        ),
-      );
 
   @override
   L runLogging<L>(
@@ -209,9 +211,11 @@ final class AppLogger$Logging extends AppLogger {
 }
 
 extension on DateTime {
+  static const pad = 2;
+
   /// Transforms DateTime to String with format: 00:00:00
   String formatTime() =>
-      [hour, minute, second].map((i) => i.toString().padLeft(2)).join(':');
+      [hour, minute, second].map((i) => i.toString().padLeft(pad)).join(':');
 }
 
 extension on logging.Level {

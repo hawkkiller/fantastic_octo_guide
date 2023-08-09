@@ -1,12 +1,20 @@
+// ignore_for_file: prefer-match-file-name
+
 import 'package:flutter/material.dart';
 
+/// BuildScope
 typedef BuildScope = Widget Function(Widget child);
 
+/// BuildWidget
 typedef BuildWidget = Widget Function(BuildContext context, Widget? child);
 
 Never _childIsNull() => throw ArgumentError.notNull('child');
 
+/// @{template scope_provider}
+/// A widget that provides a scope to its descendants.
+/// {@endtemplate}
 class ScopeProvider extends StatelessWidget {
+  /// {@macro scope_provider}
   const ScopeProvider({
     required this.buildScope,
     this.child,

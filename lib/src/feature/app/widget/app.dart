@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:octopus/src/core/widget/scope_widgets.dart';
 import 'package:octopus/src/core/widget/theme_scope.dart';
 import 'package:octopus/src/feature/app/widget/app_context.dart';
-import 'package:octopus/src/feature/initialization/model/dependencies.dart';
-import 'package:octopus/src/feature/initialization/widget/dependencies_scope.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+/// {@template app}
 /// A widget which is responsible for running the app.
+/// {@endtemplate}
 class App extends StatelessWidget {
+  /// {@macro app}
   const App({
-    required this.result,
     super.key,
   });
 
+  /// run application
   void run() => runApp(
         DefaultAssetBundle(
           bundle: SentryAssetBundle(),
@@ -20,17 +21,9 @@ class App extends StatelessWidget {
         ),
       );
 
-  final InitializationResult result;
-
   @override
   Widget build(BuildContext context) => ScopesProvider(
         providers: [
-          ScopeProvider(
-            buildScope: (child) => DependenciesScope(
-              dependencies: result.dependencies,
-              child: child,
-            ),
-          ),
           ScopeProvider(
             buildScope: (child) => ThemeScope(
               child: child,

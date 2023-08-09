@@ -7,8 +7,6 @@ typedef GeneratedLocalization = GeneratedLocalizations;
 ///
 /// [AppLocalization] is a wrapper around [GeneratedLocalizations].
 class AppLocalization {
-  AppLocalization._();
-
   /// All the supported locales
   ///
   /// SSOT - arb files
@@ -18,9 +16,11 @@ class AppLocalization {
   static const localizationsDelegates =
       GeneratedLocalizations.localizationsDelegates;
 
+  AppLocalization._();
+
   /// Returns the localized strings for the given [context].
   static T stringOf<T>(BuildContext context) =>
-      Localizations.of<T>(context, T)!;
+      Localizations.of<T>(context, T) ?? (throw 'No localization found');
 
   /// Returns the current locale of the [context].
   static Locale? localeOf(BuildContext context) =>

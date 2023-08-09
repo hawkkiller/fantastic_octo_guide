@@ -1,25 +1,40 @@
+// ignore_for_file: prefer-match-file-name
+
 import 'package:flutter/material.dart';
 import 'package:octopus/src/core/theme/theme.dart';
 import 'package:octopus/src/core/utils/mixin/scope_mixin.dart';
 
+/// {@template theme_controller}
+/// A class which is responsible for managing the theme.
+/// {@endtemplate}
 abstract interface class ThemeController {
+  /// Seed color
   Color get seedColor;
 
+  /// Light theme data
   ThemeData get lightThemeData;
 
+  /// Dark theme data
   ThemeData get darkThemeData;
 
+  /// Set seed color
   void setSeed(Color seedColor);
 }
 
+/// {@template theme_scope}
+/// Theme Scope
+/// {@endtemplate}
 class ThemeScope extends StatefulWidget {
+  /// {@macro theme_scope}
   const ThemeScope({
     required this.child,
     super.key,
   });
 
+  /// Child widget
   final Widget child;
 
+  /// Get theme controller
   static ThemeController of(BuildContext context, {bool listen = true}) =>
       ScopeMixin.scopeOf<_ThemeInherited>(
         context,
